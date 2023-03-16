@@ -5,10 +5,13 @@ const formController = {
     find: function (req, res){
 
         const {id, email} = req.body
-        const query = `SELECT * FROM clientes WHERE idcliente = ${id} OR email = "${email}"`
+        const query = `SELECT * FROM clientes WHERE idcliente= "${id}" OR email= "${email}"`
 
         connection.query(query, (err, rows)=>{
-            if (err) res.status(404).send("Cliente não encontrado")
+            if (rows.length < 1){
+                res.status(404).send("Cliente não encontrado") 
+                return
+            } 
  
             res.status(200).send(rows)         
         }) 
@@ -29,7 +32,10 @@ const formController = {
         const query = `INSERT INTO clientes SET ?`
 
         connection.query(query, client, (err, output)=>{
-            if (err) res.status(400).send("Preencha todo o formulário para enviar") 
+            if (err){
+                res.status(400).send("Preencha todo o formulário para enviar") 
+                return
+            } 
             res.status(200).send("Cliente cadastrado com sucesso!")
         })
     }
