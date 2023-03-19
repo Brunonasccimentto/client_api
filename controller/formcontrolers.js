@@ -13,7 +13,7 @@ const formController = {
                 return
             } 
  
-            res.status(200).send(rows)         
+            res.status(200).json(rows)         
         }) 
     },
     getTypes: function (req, res){
@@ -33,7 +33,7 @@ const formController = {
 
         connection.query(query, client, (err, output)=>{
             if (err){
-                res.status(400).send("Preencha todo o formulário para enviar") 
+                res.status(400).send("Preencha todo o formulário para enviar" + " " + err) 
                 return
             } 
             res.status(200).send("Cliente cadastrado com sucesso!")
