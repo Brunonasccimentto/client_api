@@ -4,8 +4,9 @@ const formController = {
 
     find: function (req, res){
 
-        const {id, email} = req.body
-        const query = `SELECT * FROM clientes WHERE idcliente= "${id}" OR email= "${email}"`
+        const value= req.params.value
+        console.log(value)
+        const query = `SELECT * FROM clientes WHERE idcliente= "${value}" OR email= "${value}"`
 
         connection.query(query, (err, rows)=>{
             if (rows.length < 1){

@@ -4,6 +4,6 @@ const router = express.Router()
 
 router.post("/register", formController.register) //registrar cliente
 router.get("/clientTypes", formController.getTypes) //consultar tipos de cliente
-router.post("/find", formController.find) //buscar cliente
+router.get("/find/:value", formController.find) //buscar cliente
 
 module.exports = router
