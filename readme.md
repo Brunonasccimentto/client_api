@@ -1,20 +1,28 @@
 -para criar o container com o banco de dados:
+
 No terminal use os seguintes comandos:
+
 docker pull brunonasccimentto/cliente-db:1.0
+
 docker run -p 3306:3306 --name=server -d brunonasccimentto/cliente-db:1.0
 
 O name TEM que ser server para manter o mesmo nome da conexão a api.
 
 -Para criar o container da api e linkar ao container do banco de dados:
+
 docker pull brunonasccimentto/clienteapi:1.5
+
 docker run -p 3000:3000 -d --name [container-name] --link server:mysql brunonasccimentto/clienteapi:1.5    (as duas linhas são um comando só)
 
 O container server deve estar rodando para fazer o link
 
 Como usar a API:
+
 Consultar todos os tipos de clientes:
 GET http://localhost:3000/form/clientTypes
+
 response:
+
 [
 {
 "idtipo_cliente": 1,
@@ -32,7 +40,9 @@ response:
 
 
 GET http://localhost:3000/form/find/email/mkj_586@gmail.com
+
 response:
+
 [
 {
 "idcliente": 11,
@@ -51,7 +61,9 @@ response:
 ]
 
 GET http://localhost:3000/form/find/id/7
+
 response:
+
 [
 {
 "idcliente": 7,
@@ -71,6 +83,7 @@ response:
 
 
 POST http://localhost:3000/form/register
+
 Content-Type: multipart/form-data;
 
 Parâmetros exigidos:
@@ -89,6 +102,7 @@ idtipo_cliente int
 
 
 varchar(100) = aceita qualquer caracter até o limite de 100 caracteres.
+
 int = numero de 1 a 3
  
 
